@@ -1,67 +1,44 @@
-version: v1.1.0
-
-dsn: memory
-
-serve:
-  public:
-    base_url: http://127.0.0.1:4433
-    cors:
-      enabled: true
-  admin:
-    base_url: http://127.0.0.1:4434
-
 selfservice:
-  default_browser_return_url: http://127.0.0.1:4455/
-  allowed_return_urls:
-    - http://127.0.0.1:4455
-
   methods:
-    password:
+    oidc:
       enabled: true
-      config:
-        min_password_length: 6
-        identifier_similarity_check_enabled: false
-        haveibeenpwned_enabled: false
 
   flows:
-    error:
-      ui_url: http://127.0.0.1:4455/error
-    settings:
-      ui_url: http://127.0.0.1:4455/settings
-      privileged_session_max_age: 15m
-      required_aal: highest_available
-    logout:
-      after:
-        default_browser_return_url: http://127.0.0.1:4455/login
     login:
-      ui_url: http://127.0.0.1:4455/login
+      ui_url: http://localhost:3000/login
     registration:
-      ui_url: http://127.0.0.1:4455/registration
-      after:
-        password:
-          hooks:
-            - hook: session
+      ui_url: http://localhost:3000/register
 
-log:
-  format: text
-  leak_sensitive_values: true
-  level: info
-
-secrets:
-  cookie:
-    - CHANGE_ME_TO_REAL_SECRET
-  cipher:
-    - 32-LONG-SECRET-NOT-SECURE-AT-ALL
+  # Optional: redirect after login
+  after:
+    login:
+      default_browser_return_url: http://localhost:3000/dashboard
 
 identity:
-  default_schema_id: default
-  schemas: 
+  default_schema_url: file:///etc/config/identity.schema.json
+
+  schemas:
     - id: default
-      url: file:///etc/config/kratos/identity.schema.json # Important: identity schema
+      url: file:///etc/config/identity.schema.json
 
-courier:
-  smtp:
-    connection_uri: smtps://test:test@mailslurper:1025/?skip_ssl_verify=true
-
-oauth2_provider:
-  url: http://hydra:4445 # Important: hydra admin URL
+oidc:
+  config:
+    providers:
+      - id: google
+        provider: google
+        client_id: 1054514447528-rnakjmumn1s439bv4c3g85tv9k11viid.apps.googleusercontent.com
+        client_secret: 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
+        mapper_url: file:///etc/config/oidc.google.mapper.json
+        scope:
+          - openid
+          - email
+          - profile
+        requested_claims:
+          id_token:
+            email:
+              essential: true
+            email_verified:
+              essential: true
+        # Optional: อนุญาต email domain เฉพาะ
+        # allowed_domains:
+        #   - example.com

@@ -1,0 +1,8 @@
+{
+    "id_token": {
+      "traits.email": "{{ .email }}",
+      "traits.google.id": "{{ .sub }}",
+      "traits.google.2fa_enabled": false
+    }
+  }
+  

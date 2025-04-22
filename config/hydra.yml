@@ -5,8 +5,7 @@ serve:
     cors:
       enabled: true
       allowed_origins:
-        - http://127.0.0.1*
-        - http://localhost*
+        - *
       allowed_methods:
         - POST
         - GET
@@ -22,8 +21,7 @@ serve:
     cors:
       enabled: true
       allowed_origins:
-        - http://127.0.0.1*
-        - http://localhost*
+        - *
       allowed_methods:
         - GET
         - POST
@@ -38,12 +36,12 @@ serve:
 # 4434: Kratos admin URL
 urls:
   self:
-    issuer: http://127.0.0.1:4444
-  consent: http://127.0.0.1:4455/consent
-  login: http://127.0.0.1:4455/login
-  logout: http://127.0.0.1:4455/logout
+    issuer: http://167.172.31.247:4444
+  consent: http://167.172.31.247:4455/consent
+  login: http://167.172.31.247:4455/login
+  logout: http://167.172.31.247:4455/logout
   identity_provider:
-    url: http://127.0.0.1:4434
+    url: http://167.172.31.247:4434
 
 secrets:
   system:

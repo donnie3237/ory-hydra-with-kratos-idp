@@ -6,24 +6,27 @@
   "properties": {
     "traits": {
       "type": "object",
+      "required": ["email"],
       "properties": {
         "email": {
           "type": "string",
-          "format": "email",
-          "title": "email",
-          "minLength": 6,
-          "ory.sh/kratos": {
-            "credentials": {
-              "password": {
-                "identifier": true
-              }
+          "format": "email"
+        },
+        "google": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "title": "Google ID"
+            },
+            "2fa_enabled": {
+              "type": "boolean",
+              "title": "2FA Enabled"
             }
-          }
+          },
+          "required": ["id"]
         }
       },
-      "required": [
-        "email"
-      ],
       "additionalProperties": false
     }
   }

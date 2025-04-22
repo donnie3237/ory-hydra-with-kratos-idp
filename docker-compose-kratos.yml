@@ -22,7 +22,7 @@ services:
       - "4455:4455"
     environment:
       - KRATOS_PUBLIC_URL=http://kratos:4433/
-      - KRATOS_BROWSER_URL=http://127.0.0.1:4433/
+      - KRATOS_BROWSER_URL=http://167.172.31.247:4433/
       - HYDRA_ADMIN_URL=http://hydra:4445
       - PORT=4455
       - COOKIE_SECRET=SuperSecretCookie # not included in quick-start.yml
